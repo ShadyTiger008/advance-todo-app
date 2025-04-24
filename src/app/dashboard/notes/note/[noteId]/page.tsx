@@ -1,14 +1,7 @@
-import NoteEditorPage from "~/components/notes/note-editor";
-// import { getNoteById } from "~/libs/note-service";
+import NoteEditor from "~/components/notes/note-editor";
 
-export default async function NoteEditor({
-  // params,
-}: {
-  // params: { id: string };
-}) {
-  //   const note = await getNoteById(params.id);
-
-  var note = {
+export default function NoteEditorPage() {
+  const note = {
     id: "note-1",
     title: "Meeting Notes: Product Team",
     content:
@@ -18,5 +11,5 @@ export default async function NoteEditor({
     updatedAt: "2023-04-10T11:15:00Z",
   };
 
-  return <NoteEditorPage note={note} />;
+  return <NoteEditor note={note} />;
 }

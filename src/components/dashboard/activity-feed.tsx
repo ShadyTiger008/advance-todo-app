@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { activities } from "~/app/data/activities";
+import { activities } from "~/data/activities";
 import { formatRelativeTime } from "~/libs/utils";
 
 export function ActivityFeed() {

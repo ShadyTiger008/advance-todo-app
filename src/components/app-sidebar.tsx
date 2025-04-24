@@ -30,8 +30,8 @@ import {
   LogOut,
   ChevronDown,
 } from "lucide-react";
-import { projects } from "~/app/data/project";
-import { workspaces } from "~/app/data/workspaces";
+import { projects } from "~/data/project";
+import { workspaces } from "~/data/workspaces";
 import {
   DropdownMenu,
   DropdownMenuContent,

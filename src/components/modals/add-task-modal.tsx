@@ -30,7 +30,7 @@ import { CalendarIcon, Plus, X } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
 import { cn } from "~/libs/utils";
-import { projects } from "~/app/data/project";
+import { projects } from "~/data/project";
 import { toast } from "sonner";
 
 type AddTaskModalProps = {
@@ -133,7 +133,7 @@ export function AddTaskModal({ open, onOpenChange }: AddTaskModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
+      <DialogContent className="max-h-[90vh] w-150 overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Create New Task</DialogTitle>
           <DialogDescription>Add a new task to your project.</DialogDescription>

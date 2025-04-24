@@ -6,7 +6,7 @@ import { TaskBoard } from "~/components/tasks/task-board";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import type { Task } from "~/types/tasks";
-import { tasks as initialTasks } from "../../../data/tasks";
+import { tasks as initialTasks } from "../../../../data/tasks";
 
 export default function BoardPage() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);

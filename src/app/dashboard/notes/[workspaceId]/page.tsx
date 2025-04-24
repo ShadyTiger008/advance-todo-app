@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { NotesHeader } from "~/components/notes/notes-header";
 import { NotesList } from "~/components/notes/notes-list";
-import { workspaces } from "~/app/data/workspaces";
+import { workspaces } from "~/data/workspaces";
 
 export default function WorkspaceNotesPage() {
   const params = useParams();

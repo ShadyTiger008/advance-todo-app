@@ -28,8 +28,8 @@ import {
   MoreHorizontal,
   Filter,
 } from "lucide-react";
-import { projects } from "~/app/data/project";
-import { tasks } from "~/app/data/tasks";
+import { projects } from "~/data/project";
+import { tasks } from "~/data/tasks";
 import { formatDate, getPriorityColor, getStatusColor } from "~/libs/utils";
 import { AddTaskModal } from "~/components/modals/add-task-modal";
 import { TaskDetailModal } from "~/components/tasks/task-detail-drawer";
@@ -83,7 +83,7 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-6 md:p-8">
+    <div className="flex flex-col gap-6 p-6 md:p-8 w-full">
       <div className="flex items-center justify-between">
         <div>
           <div className="mb-1 flex items-center gap-2">

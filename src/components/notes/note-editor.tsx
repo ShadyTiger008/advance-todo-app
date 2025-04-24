@@ -22,7 +22,7 @@ import {
   Clock,
   Tag,
 } from "lucide-react";
-import { workspaces } from "~/app/data/workspaces";
+import { workspaces } from "~/data/workspaces";
 import { formatRelativeTime } from "~/libs/utils";
 import { toast } from "sonner";
 
@@ -39,7 +39,7 @@ type NoteEditorProps = {
   note: Note;
 };
 
-export default function NoteEditorPage({ note }: NoteEditorProps) {
+export default function NoteEditor({ note }: NoteEditorProps) {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");

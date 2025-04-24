@@ -4,6 +4,14 @@ import { useMemo, useState } from "react";
 import type { Task } from "~/types/tasks";
 import { TaskCard } from "./task-card";
 import { TaskDetailModal } from "./task-detail-drawer";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 type TaskBoardProps = {
   tasks: Task[];
@@ -57,11 +65,18 @@ export function TaskBoard({ tasks, moveTask }: TaskBoardProps) {
             >
               <div className="flex flex-col gap-2">
                 {columns[status].map((task) => (
-                  <TaskCard
-                    key={task.id}
-                    task={task}
-                    onClick={() => openTaskDetail(task)}
-                  />
+                  <Dialog key={task.id}>
+                    <DialogTrigger>
+                      <TaskCard
+                        key={task.id}
+                        task={task}
+                        onClick={() => openTaskDetail(task)}
+                      />
+                    </DialogTrigger>
+                    <DialogContent className="w-11/12">
+                      <TaskDetailModal task={task}/>
+                    </DialogContent>
+                  </Dialog>
                 ))}
               </div>
             </div>
@@ -69,13 +84,13 @@ export function TaskBoard({ tasks, moveTask }: TaskBoardProps) {
         ))}
       </div>
 
-      {selectedTask && (
+      {/* {selectedTask && (
         <TaskDetailModal
           task={selectedTask}
           open={isDrawerOpen}
           onClose={() => setIsDrawerOpen(false)}
         />
-      )}
+      )} */}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
-import { tasks } from "~/app/data/tasks";
+import { tasks } from "~/data/tasks";
 import { formatDate, getPriorityColor } from "~/libs/utils";
 
 export function UpcomingDeadlines() {

@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
-import { notes } from "~/app/data/notes";
-import { workspaces } from "~/app/data/workspaces";
+import { notes } from "~/data/notes";
+import { workspaces } from "~/data/workspaces";
 import { formatRelativeTime } from "~/libs/utils";
 import { useRouter } from "next/navigation";
 // import { NoteEditor } from "./note-editor";

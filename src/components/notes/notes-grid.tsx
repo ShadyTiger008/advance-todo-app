@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
-import { workspaces } from "~/app/data/workspaces";
-import { notes } from "~/app/data/notes";
+import { workspaces } from "~/data/workspaces";
+import { notes } from "~/data/notes";
 import { formatRelativeTime } from "~/libs/utils";
 import { NoteEditor } from "./note-editor";
 import { useRouter } from "next/navigation";
@@ -83,9 +83,7 @@ export function NotesGrid() {
                     className="h-full cursor-pointer transition-shadow hover:shadow-md"
                     // onClick={() => openNoteEditor(note)}
                     onClick={() =>
-                      router.push(
-                        `/dashboard/notes/note/${note.id}`,
-                      )
+                      router.push(`/dashboard/notes/note/${note.id}`)
                     }
                   >
                     <CardContent className="p-6">

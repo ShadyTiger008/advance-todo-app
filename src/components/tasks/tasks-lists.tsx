@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Progress } from "~/components/ui/progress";
 import { Button } from "~/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
-import { tasks } from "~/app/data/tasks";
+import { tasks } from "~/data/tasks";
 import { formatDate, getPriorityColor, getStatusColor } from "~/libs/utils";
 import { TaskDetailModal } from "./task-detail-drawer";
 import type { Task } from "~/types/tasks";

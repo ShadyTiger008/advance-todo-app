@@ -10,16 +10,21 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Checkbox } from "~/components/ui/checkbox";
 import { Logo } from "~/components/ui/logo";
-import { ArrowLeft, Github, Mail } from "lucide-react";
+import { ArrowLeft, Github, Mail, KeyRound } from "lucide-react";
 import { AnimatedGradientBorder } from "~/components/ui/animated-gradient-border";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { toast } from "sonner";
+import { OtpInput } from "~/components/auth/otp-input";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [otpEmail, setOtpEmail] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [activeTab, setActiveTab] = useState("password");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handlePasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -27,6 +32,33 @@ export default function LoginPage() {
     setTimeout(() => {
       setIsLoading(false);
       toast("You have successfully logged in.");
+    }, 1500);
+  };
+
+  const handleSendOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!otpEmail) {
+      toast("Please enter your email address.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Simulate API call to send OTP
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsOtpSent(true);
+      toast("A verification code has been sent to your email.");
+    }, 1500);
+  };
+
+  const handleVerifyOtp = (otp: string) => {
+    setIsLoading(true);
+
+    // Simulate API call to verify OTP
+    setTimeout(() => {
+      setIsLoading(false);
+      toast("OTP verified successfully. You are now logged in.");
     }, 1500);
   };
 
@@ -115,78 +147,176 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="name~example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <Link
-                    href="/auth/forgot-password"
-                    className="text-primary text-sm font-medium hover:underline"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="remember" />
-                <Label
-                  htmlFor="remember"
-                  className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
+              <TabsList className="mb-6 grid w-full grid-cols-2">
+                <TabsTrigger
+                  value="password"
+                  className="flex items-center gap-2"
                 >
-                  Remember me
-                </Label>
-              </div>
-              <AnimatedGradientBorder>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? (
-                    <div className="flex items-center">
-                      <svg
-                        className="mr-3 -ml-1 h-4 w-4 animate-spin text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
+                  <KeyRound className="h-4 w-4" />
+                  Password
+                </TabsTrigger>
+                <TabsTrigger value="otp" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  OTP
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="password">
+                <form onSubmit={handlePasswordLogin} className="space-y-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="name~example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor="password">Password</Label>
+                      <Link
+                        href="/auth/forgot-password"
+                        className="text-primary text-sm font-medium hover:underline"
                       >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Signing in...
+                        Forgot password?
+                      </Link>
                     </div>
-                  ) : (
-                    "Sign In"
-                  )}
-                </Button>
-              </AnimatedGradientBorder>
-            </form>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox id="remember" />
+                    <Label
+                      htmlFor="remember"
+                      className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Remember me
+                    </Label>
+                  </div>
+                  <AnimatedGradientBorder>
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <div className="flex items-center">
+                          <svg
+                            className="mr-3 -ml-1 h-4 w-4 animate-spin text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Signing in...
+                        </div>
+                      ) : (
+                        "Sign In"
+                      )}
+                    </Button>
+                  </AnimatedGradientBorder>
+                </form>
+              </TabsContent>
+
+              <TabsContent value="otp">
+                {!isOtpSent ? (
+                  <form onSubmit={handleSendOtp} className="space-y-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="otpEmail">Email</Label>
+                      <Input
+                        id="otpEmail"
+                        type="email"
+                        placeholder="name~example.com"
+                        value={otpEmail}
+                        onChange={(e) => setOtpEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <AnimatedGradientBorder>
+                      <Button
+                        type="submit"
+                        className="w-full"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <div className="flex items-center">
+                            <svg
+                              className="mr-3 -ml-1 h-4 w-4 animate-spin text-white"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
+                            </svg>
+                            Sending OTP...
+                          </div>
+                        ) : (
+                          "Send OTP"
+                        )}
+                      </Button>
+                    </AnimatedGradientBorder>
+                  </form>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="mb-4 text-center">
+                      <h3 className="text-lg font-medium">Verify OTP</h3>
+                      <p className="text-muted-foreground text-sm">
+                        Enter the verification code sent to {otpEmail}
+                      </p>
+                    </div>
+                    <OtpInput onComplete={handleVerifyOtp} />
+                    <div className="text-center">
+                      <Button
+                        variant="link"
+                        onClick={() => setIsOtpSent(false)}
+                        className="text-sm"
+                      >
+                        Change email
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
 
             <div className="mt-6 text-center">
               <p className="text-muted-foreground text-sm">

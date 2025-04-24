@@ -5,7 +5,7 @@ import "~/styles/globals.css";
 import { ThemeProvider } from "~/components/theme-provider";
 import { AppSidebar } from "~/components/app-sidebar";
 import { SidebarProvider } from "~/components/ui/sidebar";
-import { Toaster } from "~/components/ui/sonner";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,9 +29,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            <div className="bg-background flex w-full h-screen overflow-hidden">
+            <div className="bg-background flex h-screen overflow-hidden">
               <AppSidebar />
-              <main className="flex-1 overflow-auto">{children}</main>
+              <main className="w-screen flex-1 overflow-auto">{children}</main>
             </div>
           </SidebarProvider>
           <Toaster />

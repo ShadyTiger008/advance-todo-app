@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col gap-6 p-6 md:p-8">
+    <div className="flex flex-col gap-6 p-6 md:p-8 w-full">
       <DashboardHeader />
       <DashboardStats />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

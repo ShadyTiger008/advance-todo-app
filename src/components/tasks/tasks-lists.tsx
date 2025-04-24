@@ -19,14 +19,15 @@ import { tasks } from "~/data/tasks";
 import { formatDate, getPriorityColor, getStatusColor } from "~/libs/utils";
 import { TaskDetailModal } from "./task-detail-drawer";
 import type { Task } from "~/types/tasks";
+import { Dialog, DialogContent } from "../ui/dialog";
 
 export function TasksList() {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openTaskDetail = (task: Task) => {
     setSelectedTask(task);
-    setIsDrawerOpen(true);
+    setIsDialogOpen(true);
   };
 
   return (
@@ -120,13 +121,12 @@ export function TasksList() {
         </Table>
       </div>
 
-      {selectedTask && (
-        <TaskDetailModal
-          task={selectedTask}
-          open={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
-        />
-      )}
+      {/* Task Detail Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="w-11/12">
+          {selectedTask && <TaskDetailModal task={selectedTask} />}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

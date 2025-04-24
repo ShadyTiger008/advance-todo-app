@@ -2,9 +2,9 @@ import NoteEditorPage from "~/components/notes/note-editor";
 // import { getNoteById } from "~/libs/note-service";
 
 export default async function NoteEditor({
-  params,
+  // params,
 }: {
-  params: { id: string };
+  // params: { id: string };
 }) {
   //   const note = await getNoteById(params.id);
 

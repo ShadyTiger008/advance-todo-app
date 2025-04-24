@@ -12,8 +12,8 @@ export default function BoardPage() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
   const moveTask = (taskId: string, newStatus: string) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
+    setTasks((prevTasks: any) =>
+      prevTasks.map((task: Task) =>
         task.id === taskId ? { ...task, status: newStatus } : task,
       ),
     );
